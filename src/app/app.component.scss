@@ -21,4 +21,8 @@ mat-toolbar {
   cursor: pointer;
   font-size: 16px;
   font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.nav_link:hover {
+  color: #f8a555;
 }

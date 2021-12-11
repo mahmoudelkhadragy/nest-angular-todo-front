@@ -4,7 +4,10 @@
       ><img src="assets/images/logo.png" class="img-fluid img" alt="todo logo"
     /></span>
     <span class="spacer"></span>
-    <div class="d-flex justify-content-around align-items-center">
+    <div
+      *ngIf="!isLogedIn"
+      class="d-flex justify-content-around align-items-center"
+    >
       <span routerLink="/login" class="nav_link mr-2">
         Login
         <mat-icon>login</mat-icon>
@@ -15,6 +18,19 @@
         <mat-icon>how_to_reg</mat-icon>
       </span>
     </div>
+    <div
+      *ngIf="isLogedIn"
+      class="d-flex justify-content-around align-items-center"
+    >
+      <p class="mb-0 nav_link mr-3">Welcome, Rod</p>
+
+      <span class="nav_link ml-2">
+        logout
+        <mat-icon>logout</mat-icon>
+      </span>
+    </div>
   </div>
 </mat-toolbar>
-<app-home></app-home>
+<div class="container pt-2">
+  <router-outlet></router-outlet>
+</div>

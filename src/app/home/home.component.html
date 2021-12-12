@@ -7,7 +7,7 @@
   <div class="col-6">
     <mat-form-field appearance="outline" class="d-flex justify-content-end">
       <mat-label>Select a status</mat-label>
-      <mat-select placeholder="">
+      <mat-select (selectionChange)="filterChanged($event)">
         <mat-option value="COMPLETED">Done</mat-option>
         <mat-option value="IN_PROGRESS">In Progress</mat-option>
         <mat-option value="OPEN">OPEN</mat-option>
@@ -17,10 +17,38 @@
 </div>
 <hr />
 <div class="row">
-  <div class="col-10 col-md-6 offset-md-3 offset-1">
-    <mat-card class="todo">
-      <mat-card-title class="p-2 text-dark">todo title</mat-card-title>
-      <mat-card-content> fffff </mat-card-content>
-    </mat-card>
+  <div class="col-10 col-md-8 offset-md-2 offset-1">
+    <!-- start todo -->
+    <ng-container *ngFor="let todo of filteredTodos">
+      <div class="todo">
+        <mat-expansion-panel hideToggle class="mb-3">
+          <mat-expansion-panel-header>
+            <div class="d-flex justify-content-between w-100">
+              <h3 class="mb-0 todo__title">{{ todo.title }}</h3>
+              <span (click)="deleteTodo($event)" class="delete_icon"
+                ><mat-icon>delete_outline</mat-icon></span
+              >
+            </div>
+          </mat-expansion-panel-header>
+          <div class="todo__body">
+            <div class="d-flex justify-content-between align-items-centers">
+              <h3 class="mb-0">Description:</h3>
+              <button mat-icon-button [matMenuTriggerFor]="belowMenu">
+                <mat-icon>more_horiz</mat-icon>
+              </button>
+              <mat-menu #belowMenu="matMenu" yPosition="below">
+                <button mat-menu-item>Done</button>
+                <button mat-menu-item>In Progress</button>
+                <button mat-menu-item>Open</button>
+              </mat-menu>
+            </div>
+            <p class="mb-0">
+              {{ todo.description }}
+            </p>
+          </div>
+        </mat-expansion-panel>
+        <!-- end todo -->
+      </div>
+    </ng-container>
   </div>
 </div>

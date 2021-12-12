@@ -8,6 +8,22 @@ button.mat-fab {
     line-height: 20px;
   }
 }
+.todo {
+  .mat-expansion-panel-header.mat-expanded,
+  .mat-expansion-panel-header {
+    height: auto;
+    padding: 10px 15px;
+  }
+  &__title {
+    text-transform: capitalize;
+  }
+}
+.delete_icon {
+  transition: all 0.2s ease-in-out;
+}
+.delete_icon:hover {
+  color: red;
+}
 :host ::ng-deep mat-form-field .mat-form-field-wrapper {
   padding-bottom: 0 !important;
 }

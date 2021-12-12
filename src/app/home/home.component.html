@@ -8,6 +8,7 @@
     <mat-form-field appearance="outline" class="d-flex justify-content-end">
       <mat-label>Select a status</mat-label>
       <mat-select (selectionChange)="filterChanged($event)">
+        <mat-option>All</mat-option>
         <mat-option value="COMPLETED">Done</mat-option>
         <mat-option value="IN_PROGRESS">In Progress</mat-option>
         <mat-option value="OPEN">OPEN</mat-option>
@@ -19,7 +20,7 @@
 <div class="row">
   <div class="col-10 col-md-8 offset-md-2 offset-1">
     <!-- start todo -->
-    <ng-container *ngFor="let todo of filteredTodos">
+    <ng-container *ngFor="let todo of filteredTodos; let i = index">
       <div class="todo">
         <mat-expansion-panel hideToggle class="mb-3">
           <mat-expansion-panel-header>
@@ -37,9 +38,24 @@
                 <mat-icon>more_horiz</mat-icon>
               </button>
               <mat-menu #belowMenu="matMenu" yPosition="below">
-                <button mat-menu-item>Done</button>
-                <button mat-menu-item>In Progress</button>
-                <button mat-menu-item>Open</button>
+                <button
+                  mat-menu-item
+                  (click)="statusChanged('COMPLETED', todo.id, i)"
+                >
+                  Done
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="statusChanged('IN_PROGRESS', todo.id, i)"
+                >
+                  In Progress
+                </button>
+                <button
+                  mat-menu-item
+                  (click)="statusChanged('OPEN', todo.id, i)"
+                >
+                  Open
+                </button>
               </mat-menu>
             </div>
             <p class="mb-0">

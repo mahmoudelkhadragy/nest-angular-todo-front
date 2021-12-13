@@ -8,6 +8,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +24,15 @@ export class AuthGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    return true;
+    return this.apiService.jwtUserToken.pipe(
+      map((result: string) => !!result),
+      tap((result: boolean) => {
+        if (!result) {
+          this.router.navigateByUrl('/login').then();
+          return result;
+        }
+        return result;
+      })
+    );
   }
 }

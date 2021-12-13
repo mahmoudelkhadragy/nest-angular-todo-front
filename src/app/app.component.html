@@ -22,9 +22,9 @@
       *ngIf="isLogedIn"
       class="d-flex justify-content-around align-items-center"
     >
-      <p class="mb-0 nav_link mr-3">Welcome, Rod</p>
+      <p class="mb-0 nav_link mr-3">Welcome, {{ username | titlecase }}</p>
 
-      <span class="nav_link ml-2">
+      <span (click)="logout()" class="nav_link ml-2">
         logout
         <mat-icon>logout</mat-icon>
       </span>

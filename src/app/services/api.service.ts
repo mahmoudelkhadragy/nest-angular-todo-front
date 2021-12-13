@@ -114,7 +114,9 @@ export class ApiService {
         }
       },
       (err: HttpErrorResponse) => {
-        console.log(err.message);
+        this.toast.error('Authentication failed, try again', '', {
+          timeOut: 1000,
+        });
       }
     );
   }

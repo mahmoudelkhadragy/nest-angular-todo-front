@@ -26,9 +26,7 @@
           <mat-expansion-panel-header>
             <div class="d-flex justify-content-between w-100">
               <h3 class="mb-0 todo__title">{{ todo.title }}</h3>
-              <span
-                (click)="deleteTodo($event, todo.todoId)"
-                class="delete_icon"
+              <span (click)="deleteTodo($event, todo.id)" class="delete_icon"
                 ><mat-icon>delete_outline</mat-icon></span
               >
             </div>
@@ -48,7 +46,7 @@
                 </button>
                 <button
                   mat-menu-item
-                  (click)="statusChanged('IN_PROGRESS', todo.id, i)"
+                  (click)="statusChanged('INPROGRESS', todo.id, i)"
                 >
                   In Progress
                 </button>

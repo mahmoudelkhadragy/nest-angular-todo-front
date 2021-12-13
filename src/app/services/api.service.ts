@@ -95,29 +95,28 @@ export class ApiService {
 
   // login
   login(username: string, password: string) {
-    this.http
-      .post<{ token: string }>(`${this.URL}/login`, { username, password })
-      .subscribe(
-        (res) => {
-          this.token = res.token;
-          if (this.token) {
-            this.toast
-              .success('Login successfully, redirect now', '', {
-                timeOut: 700,
-                positionClass: 'toast-top-right',
-              })
-              .onHidden.toPromise()
-              .then(() => {
-                this.jwtToken$.next(this.token);
-                localStorage.setItem('act', btoa(this.token));
-                this.router.navigateByUrl('/').then();
-              });
-          }
-        },
-        (err: HttpErrorResponse) => {
-          console.log(err.message);
+    this.http.post(`${this.URL}/auth/login`, { username, password }).subscribe(
+      // @ts-ignore
+      (res: { token: string }) => {
+        this.token = res.token;
+        if (this.token) {
+          this.toast
+            .success('Login successfully, redirect now', '', {
+              timeOut: 700,
+              positionClass: 'toast-top-right',
+            })
+            .onHidden.toPromise()
+            .then(() => {
+              this.jwtToken$.next(this.token);
+              localStorage.setItem('act', btoa(this.token));
+              this.router.navigateByUrl('/').then();
+            });
         }
-      );
+      },
+      (err: HttpErrorResponse) => {
+        console.log(err.message);
+      }
+    );
   }
 
   // logout

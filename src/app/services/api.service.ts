@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
-import { tap } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -119,6 +119,11 @@ export class ApiService {
         });
       }
     );
+  }
+
+  // register
+  register(username: string, password: string) {
+    return this.http.post(`${this.URL}/auth/register`, { username, password });
   }
 
   // logout

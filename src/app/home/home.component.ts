@@ -13,10 +13,7 @@ import { TodoComponent } from '../todo/todo.component';
 })
 export class HomeComponent implements OnInit {
   todos: Todo[] = [];
-  filteredTodos: any[] = [
-    { title: 'test', description: 'test description', status: 'OPEN' },
-    { title: 'develop', description: 'develop description', status: 'OPEN' },
-  ];
+  filteredTodos: any[] = [];
   constructor(private apiService: ApiService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -50,16 +47,18 @@ export class HomeComponent implements OnInit {
     this.apiService.getAllTodos().subscribe((todos) => {
       this.todos = todos;
       this.filteredTodos = todos;
+      console.log(this.todos);
     });
   }
 
   filterChanged(e: MatSelectChange) {
     const value = e.value;
-    this.filteredTodos = this.filteredTodos;
+    // this.filteredTodos = this.filteredTodos;
     if (value) {
-      this.filteredTodos = this.filteredTodos.filter(
-        (todo: Todo) => todo.status === value
-      );
+      const newFilteredTodos = this.todos.filter((todo: Todo) => {
+        return todo.status == value;
+      });
+      this.filteredTodos = newFilteredTodos;
     } else {
       this.filteredTodos = this.todos;
     }

@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row mt-2">
   <div class="col-6">
     <button mat-fab (click)="openPopup()">
       <mat-icon>edit_note</mat-icon>
@@ -10,7 +10,7 @@
       <mat-select (selectionChange)="filterChanged($event)">
         <mat-option>All</mat-option>
         <mat-option value="COMPLETED">Done</mat-option>
-        <mat-option value="IN_PROGRESS">In Progress</mat-option>
+        <mat-option value="INPROGRESS">In Progress</mat-option>
         <mat-option value="OPEN">OPEN</mat-option>
       </mat-select>
     </mat-form-field>
